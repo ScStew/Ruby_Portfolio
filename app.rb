@@ -15,14 +15,14 @@ get '/' do
 end
 
 get '/about' do
-    erb :landing, locals:{}
+    erb :about, locals:{}
 end
 
 get '/contact' do
-    erb :landing, locals:{}
+    erb :contact, locals:{}
 end
 
 get '/projects' do
-    erb :landing, locals:{}
+    erb :projects, locals:{}
 end
 
