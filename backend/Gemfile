@@ -1,4 +1,74 @@
- source 'https://rubygems.org'
+# ==================================================
+# Sinatra + Next.js Backend Gemfile
+# ==================================================
 
-ruby "2.5.0"
-gem 'sinatra'
+source "https://rubygems.org"
+
+# -------------------------------
+# CORE WEB FRAMEWORK
+# -------------------------------
+
+gem "sinatra"
+gem "sinatra-contrib"
+gem "puma"
+
+# -------------------------------
+# DATABASE
+# -------------------------------
+
+gem "pg"
+gem "activerecord"
+gem "sinatra-activerecord"
+
+# -------------------------------
+# AUTHENTICATION
+# -------------------------------
+
+gem "bcrypt"
+gem "jwt"
+
+
+# -------------------------------
+# EXTERNAL API REQUESTS
+# -------------------------------
+
+gem "faraday"
+
+# -------------------------------
+# PERFORMANCE / JSON
+# -------------------------------
+
+gem "oj"
+
+# -------------------------------
+# BACKGROUND JOBS
+# -------------------------------
+
+gem "sidekiq"
+gem "redis"
+
+# -------------------------------
+# MARKDOWN / README GENERATION
+# -------------------------------
+
+gem "redcarpet"
+
+# -------------------------------
+# VALIDATION
+# -------------------------------
+
+gem "dry-validation"
+
+# ==================================================
+# DEVELOPMENT / TESTING
+# ==================================================
+
+group :development, :test do
+  gem "rspec"
+  gem "rack-test"
+
+  gem "factory_bot"
+  gem "faker"
+
+  gem "pry"
+end

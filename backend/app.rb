@@ -1,28 +1,8 @@
 require 'sinatra'
+require 'json'
 
-enable :sessions
-
-not_found do
-    redirect "/"
-end
-
-error do 
-    "ERROR OCCURRED: #{env['sinatra.error'].message}"
-end
+require_relative './config/cors.rb'
 
 get '/' do
-    erb :landing, locals:{}
+    'Hello World'
 end
-
-get '/about' do
-    erb :about, locals:{}
-end
-
-get '/contact' do
-    erb :contact, locals:{}
-end
-
-get '/projects' do
-    erb :projects, locals:{}
-end
-
