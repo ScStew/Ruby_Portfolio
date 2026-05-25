@@ -1,16 +1,20 @@
+require 'dotenv/load'
 require 'sinatra'
 require 'json'
-require 'dotenv/load'
 require 'jwt'
 require 'bcrypt'
 
 
 
 require_relative './config/cors.rb'
-require_relative './config/database.rb'
+require_relative './config/boot.rb'
 
 
-SECRET_KEY = "ENV['SECRET_KEY']"
+require_relative "./app/models/user"
+require_relative "./app/routes/user_routes"
+
+
+
 
 # Basic route to test if the server is running
 get '/' do
@@ -37,40 +41,40 @@ end
 
 
 # Temporary login route for testing JWT authentication
-post "/api/auth/login" do
-  content_type :json
+# post "/api/auth/login" do
+#   content_type :json
 
-  body = JSON.parse(request.body.read)
+#   body = JSON.parse(request.body.read)
 
-  email = body["email"]
-  password = body["password"]
+#   email = body["email"]
+#   password = body["password"]
 
-  # TEMP fake user
-  user = {
-    id: 1,
-    email: "admin@test.com",
-    password_digest: BCrypt::Password.create("password123"),
-    role: "admin"
-  }
+#   # TEMP fake user
+#   user = {
+#     id: 1,
+#     email: "admin@test.com",
+#     password_digest: BCrypt::Password.create("password123"),
+#     role: "admin"
+#   }
 
-  if email != user[:email]
-    halt 401, { error: "Invalid credentials" }.to_json
-  end
+#   if email != user[:email]
+#     halt 401, { error: "Invalid credentials" }.to_json
+#   end
 
-  if !BCrypt::Password.new(user[:password_digest]) == password
-    halt 401, { error: "Invalid credentials" }.to_json
-  end
+#   if !BCrypt::Password.new(user[:password_digest]) == password
+#     halt 401, { error: "Invalid credentials" }.to_json
+#   end
 
-  token = JWT.encode(
-    {
-      user_id: user[:id],
-      role: user[:role]
-    },
-    SECRET_KEY,
-    "HS256"
-  )
+#   token = JWT.encode(
+#     {
+#       user_id: user[:id],
+#       role: user[:role]
+#     },
+#     SECRET_KEY,
+#     "HS256"
+#   )
 
-  {
-    token: token
-  }.to_json
-end
+#   {
+#     token: token
+#   }.to_json
+# end
